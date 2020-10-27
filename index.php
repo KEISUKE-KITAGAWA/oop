@@ -3,9 +3,9 @@
 // 以下にCarクラスを定義して、当プログラムを実行した時にエラーがでないようにして下さい。
 class Car
 {
-    private $name;
-    private $number;
-    private $color;
+    protected $name;
+    protected $number;
+    protected $color;
 
     public function __construct($name, $number, $color)
     {
@@ -55,19 +55,24 @@ class Car
 class Taxi extends Car
 {
     private $passenger;
-    
-    public function pickup($passenger)
+
+    public function pickUp($passenger)
     {
         $this->passenger = $passenger;
     }
 
+    public function infomation()
+    {
+        echo '車の車種:' . $this->name . '、車体番号:' . $this->number . '、カラー:' . $this->color . '、乗車人数は' . $this->passenger . '人です。';
+    }
+
     public function lower($passenger)
     {
-        $this->passenger = $this->passenger - $passenger;
+        $this->passenger -= $passenger;
         
-        if ($this->passenger >=0) {
+        if ($this->passenger >= 0) {
             echo $passenger . '人降車しました。';
-        }else {
+        } else {
             echo '降車人数に誤りがあります';
         }
     }
@@ -85,7 +90,6 @@ echo '<hr>';
 
 // Taxiクラスのインスタンスを生成
 $taxi1 = new Taxi('クラウンのタクシー', 222, 'black');
-
 // 3人乗車
 $taxi1->pickUp(3);
 
